@@ -1,0 +1,80 @@
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+    padding: 40px 10px;
+    background-color: #121212;
+    width: 100%;
+    border-radius: 12px;
+}
+form h1{
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form h1::after{
+    position: absolute;
+    content: ' ';
+    width: 100px;
+    height: 2px;
+    background-color: #FB4635;
+    bottom: -2px;
+}
+.inptarea{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+label{
+    font-size: 14px;
+}
+
+input, textarea{
+    background-color: #2a2a2a;
+    border: none;
+    height: 40px;
+    padding: 0 10px;
+    border-bottom: solid 2px #00000000;
+}
+
+textarea{
+    max-width: 300px;
+    min-height: 100px;
+    padding: 10px ;
+}
+
+input:focus, textarea:focus{
+    border-bottom: solid 2px #FB4635;
+    outline: none;   
+    background-color: #2a2a2a;
+}
+
+input[type=submit]{
+    background-color: #FB4635;
+    cursor: pointer;
+}
+
+.formlink{
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.formlink:hover{
+    opacity: 1;
+    color: #FB4635;
+}
+
+.errMsg{
+    font-size: 14px;
+    color: rgb(255, 0, 0);
+    margin-bottom: 15px;
+}
