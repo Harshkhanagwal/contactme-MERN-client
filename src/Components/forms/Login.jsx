@@ -6,11 +6,14 @@ import { AuthContext } from '../../store/auth'
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../Loader/Loader'
 
 
 const Login = () => {
 
     const [errMsg, SetErrMsg] = useState('')
+
+    const [loading, setloading] = useState(false)
 
 
     const [user, setUser] = useState({
@@ -40,7 +43,9 @@ const Login = () => {
 
 
         try {
-            const res = await fetch(`${process.env.FRONTEND_URL}/api/auth/login`, {
+            setloading(true)
+
+            const res = await fetch(`https://contactme-mern-backend.onrender.com/api/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -58,8 +63,12 @@ const Login = () => {
                 })
 
                 storeTokenInLS(data.token);
+                setloading(false)
+
                 navigate("/")
             } else {
+                setloading(false)
+
                 SetErrMsg(data.error)
             }
 
@@ -92,7 +101,15 @@ const Login = () => {
                 }
 
                 <div className="inptarea">
-                    <input type="submit" value={"Login"} />
+                    {
+                        loading ? (
+                            <div className="loadering-area">
+                                <Loader />
+                            </div>
+                        ) : (
+                            <input type="submit" value={"Login"} />
+                        )
+                    }
                 </div>
 
                 <Link to={'/auth/registration'}>

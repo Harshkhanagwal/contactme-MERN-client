@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 import { AuthContext } from '../../store/auth'
+import Loader from '../Loader/Loader';
 
 const Contactform = () => {
 
     const [userData, setUserData] = useState(true)
+    const [loading, setloading] = useState(false)
+
 
     const [msg, setMsg] = useState({
         username: "",
@@ -19,7 +22,7 @@ const Contactform = () => {
 
     const { user } = authContextValue
 
-    if (userData && user){
+    if (userData && user) {
         setMsg({
             username: user.username,
             email: user.email,
@@ -42,10 +45,11 @@ const Contactform = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        
+
         try {
-            console.log("hii");
-            const res = await fetch(`${process.env.FRONTEND_URL}/api/contact/contactmsg`, {
+            setloading(true)
+
+            const res = await fetch(`https://contactme-mern-backend.onrender.com/api/contact/contactmsg`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -57,7 +61,8 @@ const Contactform = () => {
 
                 const data = await res.json()
 
-                toast(data.msg)
+                setloading(false)
+                toast.success(data.msg)
 
                 setMsg({
                     username: "",
@@ -66,12 +71,11 @@ const Contactform = () => {
                 })
 
                 userData(true)
-
-            
             }
 
         } catch (err) {
             console.log(err)
+
         }
 
 
@@ -92,11 +96,20 @@ const Contactform = () => {
 
                 <div className="inptarea">
                     <label htmlFor={"message"}>Message</label>
-                    <textarea  name={"message"} placeholder={"Write your message here"} onChange={(e) => handleInput(e)} value={msg.message} required />
+                    <textarea name={"message"} placeholder={"Write your message here"} onChange={(e) => handleInput(e)} value={msg.message} required />
                 </div>
 
                 <div className="inptarea">
-                    <input type="submit" value={"Send Message"} />
+
+                    {
+                        loading ? (
+                            <div className="loadering-area">
+                                <Loader />
+                            </div>
+                        ) : (
+                            <input type="submit" value={"Send Message"} />
+                        )
+                    }
                 </div>
 
 

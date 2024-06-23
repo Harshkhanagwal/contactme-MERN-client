@@ -16,7 +16,7 @@ const Admincontacts = () => {
     const getallcontacts = async () => {
         try {
             setLoading(true)
-            const res = await fetch(`${process.env.FRONTEND_URL}/api/admin/getallcontacts`, {
+            const res = await fetch(`https://contactme-mern-backend.onrender.com/api/admin/getallcontacts`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -37,7 +37,7 @@ const Admincontacts = () => {
     const deletecontact = async (id) => {
         try {
           console.log(id)
-          const res = await fetch(`${process.env.FRONTEND_URL}/api/admin/deletecontact/${id}`, {
+          const res = await fetch(`https://contactme-mern-backend.onrender.com/api/admin/deletecontact/${id}`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`

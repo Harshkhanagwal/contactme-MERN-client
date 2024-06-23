@@ -4,6 +4,7 @@ import Loader from '../Components/Loader/Loader';
 
 const Home = () => {
 
+  console.log()
   
   return (
     <>

@@ -22,7 +22,7 @@ const Adminusers = () => {
   const deleteUser = async (id) => {
     try {
       console.log(id)
-      const res = await fetch(`${process.env.FRONTEND_URL}/api/admin/deleteuser/${id}`, {
+      const res = await fetch(`https://contactme-mern-backend.onrender.com/api/admin/deleteuser/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`
@@ -48,7 +48,7 @@ const Adminusers = () => {
   const getAllusers = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${process.env.FRONTEND_URL}/api/admin/getallusers`, {
+      const res = await fetch(`https://contactme-mern-backend.onrender.com/api/admin/getallusers`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`

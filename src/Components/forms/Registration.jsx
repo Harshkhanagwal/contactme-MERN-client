@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../store/auth'
 
 import { toast } from 'react-toastify';
+import Loader from '../Loader/Loader'
 
 
 const Registration = () => {
@@ -15,12 +16,16 @@ const Registration = () => {
         password: ""
     })
 
+    const [loading, setloading] = useState(false)
+
     const [errMsg, SetErrMsg] = useState('')
 
     const navigate = useNavigate()
     const authContextValue = useContext(AuthContext);
 
     const { storeTokenInLS, userAuth } = authContextValue
+
+
 
     const handleInput = (e) => {
 
@@ -38,7 +43,8 @@ const Registration = () => {
 
 
         try {
-                const res = await fetch(`${process.env.FRONTEND_URL}/api/auth/register`, {
+            setloading(true)
+            const res = await fetch(`https://contactme-mern-backend.onrender.com/api/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -55,13 +61,15 @@ const Registration = () => {
                     email: "",
                     password: ""
                 })
-                
+
                 storeTokenInLS(data.token);
                 toast.success(data.msg)
+                setloading(false)
                 navigate('/')
-                
+
 
             } else {
+                setloading(false)
                 SetErrMsg(data.error)
             }
 
@@ -100,7 +108,16 @@ const Registration = () => {
 
 
                 <div className="inptarea">
-                    <input type="submit" value={"Create Account"} />
+                    {
+                        loading ? (
+                            <div className="loadering-area">
+                                <Loader />
+                            </div>
+                        ) : (
+                            <input type="submit" value={"Create Account"} />
+                        )
+                    }
+
                 </div>
 
 

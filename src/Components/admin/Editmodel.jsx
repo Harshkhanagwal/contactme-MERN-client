@@ -15,7 +15,7 @@ const Editmodel = (props) => {
 
     console.log(props.data._id)
     try { 
-      const res = await fetch(`${process.env.FRONTEND_URL}/api/admin/updateuser/${props.data._id}`, {
+      const res = await fetch(`https://contactme-mern-backend.onrender.com/api/admin/updateuser/${props.data._id}`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,

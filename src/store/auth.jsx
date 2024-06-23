@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     const userAuth = async () => {
         try {
             setIsloading(true)
-            const res = await fetch(`${process.env.FRONTEND_URL}/api/auth/user`, {
+            const res = await fetch(`https://contactme-mern-backend.onrender.com/api/auth/user`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
