@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../store/auth';
 import Loader from '../Components/Loader/Loader';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
   console.log()
-  
+
   return (
     <>
 
@@ -14,9 +15,11 @@ const Home = () => {
           <h1>Let's Connect</h1>
           <p>with our MERN contact me application</p>
 
-          <button className='contactbtn'>
-            Send Message
-          </button>
+          <Link to={'/contact'}>
+            <button className='contactbtn'>
+              Send Message
+            </button>
+          </Link>
         </section>
         <section className="aboutsection container">
           <div className="about-content">
